@@ -1,0 +1,1 @@
+For new installation, please run `bower install` after `yarn install`.
