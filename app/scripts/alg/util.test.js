@@ -17,16 +17,26 @@ function testIsPrime() {
   console.info("[testIsPrime] passed");
 }
 
-/*
-factorial - Returns a number that is the factorial of the given number.
-factorial(0)                        // 1
-factorial(1)                        // 1
-factorial(6)                        // 720
-*/
 function testFactorial() {
+  assert(1, util.factorial(0));  
+  assert(1, util.factorial(1));  
+  assert(720, util.factorial(6));  
 
+  console.info("[testFactorial] passed");
+}
+
+function testFib() {
+  assert(0, util.fib(0));
+  assert(1, util.fib(1));
+  assert(55, util.fib(10));
+  assert(6765, util.fib(20));
+  assert(12586269025, util.fib(50));
+
+  console.info("[testFib] passed");
 }
 
 export function testSuite() {
   testIsPrime();
+  testFactorial();
+  testFib();
 }
