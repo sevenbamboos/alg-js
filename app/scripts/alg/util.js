@@ -27,4 +27,49 @@ function fib(n) {
   return n1;
 }
 
-export { isPrime, factorial, fib, };
+function isSorted(arr) {
+  for (let i = 0; i < arr.length-1; i++) {
+    if (arr[i] >= arr[i+1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function filter(arr, predictor) {
+  let result = [];
+  if (arr) {
+    if (!predictor) {
+      return arr;
+    }
+
+    arr.forEach(x=>{
+      if (predictor.call(null, x)) {
+        result.push(x);
+      }
+    });
+  } 
+  return result;
+}
+
+function reduce(arr, reducer, initValue) {
+  var result = initValue;
+  if (arr && reducer) {
+    arr.forEach(x=>{
+      result = reducer.call(null, x, result);
+    });
+  }
+  return result;
+}
+
+function reverse(s) {
+  if (!s) return s;
+
+  let bufArr = s.split('');
+  for (var i = 0; i < bufArr.length/2; i++) {
+    [bufArr[i], bufArr[bufArr.length-1-i]] = [bufArr[bufArr.length-1-i], bufArr[i]];
+  }
+  return bufArr.join('');
+}
+
+export { isPrime, factorial, fib, isSorted, filter, reduce, reverse, };
