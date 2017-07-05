@@ -78,6 +78,22 @@ function testReverse() {
   console.info("[testReverse] passed");
 }
 
+function testIndexOf() {
+  assert(0, util.indexOf([1, 2, 3], 1));
+  assert(-1, util.indexOf([1, 2, 3], 4));
+
+  console.info("[testIndexOf] passed");
+}
+
+function testIsPalindrome() {
+  assert(true, util.isPalindrome(''));
+  assert(true, util.isPalindrome('abcdcba'));
+  assert(false, util.isPalindrome('abcd'));
+  assert(true, util.isPalindrome('A man a plan a canal Panama'));
+
+  console.info("[testIsPalindrome] passed");
+}
+
 export function testSuite() {
   testIsPrime();
   testFactorial();
@@ -86,4 +102,6 @@ export function testSuite() {
   testFilter();
   testReduce();
   testReverse();
+  testIndexOf();
+  testIsPalindrome();
 }

@@ -72,4 +72,23 @@ function reverse(s) {
   return bufArr.join('');
 }
 
-export { isPrime, factorial, fib, isSorted, filter, reduce, reverse, };
+function indexOf(arr, e) {
+  if (!arr || !Array.isArray(arr) || !e) return -1;
+
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] == e) return i;
+  }
+  return -1;
+}
+
+function isPalindrome(s) {
+  if (typeof s !== 'string') return false;
+  if (!s) return true;
+  let arr = s.replace(/\s+/g, '').toUpperCase().split('');
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] != arr[arr.length-1-i]) return false;
+  }
+  return true;
+}
+
+export { isPrime, factorial, fib, isSorted, filter, reduce, reverse, indexOf, isPalindrome, };
