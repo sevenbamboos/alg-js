@@ -29,7 +29,7 @@ function testIsPrime() {
   assert(true, util.isPrime(17));
   assert(false, util.isPrime(10000000000000));
 
-  console.info("[testIsPrime] passed");
+  util.info("[testIsPrime] passed");
 }
 
 function testFactorial() {
@@ -37,7 +37,7 @@ function testFactorial() {
   assert(1, util.factorial(1));  
   assert(720, util.factorial(6));  
 
-  console.info("[testFactorial] passed");
+  util.info("[testFactorial] passed");
 }
 
 function testFib() {
@@ -47,7 +47,7 @@ function testFib() {
   assert(6765, util.fib(20));
   assert(12586269025, util.fib(50));
 
-  console.info("[testFib] passed");
+  util.info("[testFib] passed");
 }
 
 function testIsSorted() {
@@ -55,34 +55,34 @@ function testIsSorted() {
   assert(true, util.isSorted([-Infinity, -5, 0, 3, 9]));
   assert(false, util.isSorted([3, 9, -3, 10]));
 
-  console.info("[testIsSorted] passed");
+  util.info("[testIsSorted] passed");
 }
 
 function testFilter() {
   assertArray([1, 2, 3, 4], util.filter([1, 2, 3, 4]));
   assertArray([1, 2], util.filter([1, 2, 3, 4], n => n < 3));
 
-  console.info("[testFilter] passed");
+  util.info("[testFilter] passed");
 }
 
 function testReduce() {
   assert(10, util.reduce([1,2,3,4], (a,b)=>a+b, 0));
 
-  console.info("[testReduce] passed");
+  util.info("[testReduce] passed");
 }
 
 function testReverse() {
   assert('', util.reverse(''));
   assert('fedcba', util.reverse('abcdef'));
 
-  console.info("[testReverse] passed");
+  util.info("[testReverse] passed");
 }
 
 function testIndexOf() {
   assert(0, util.indexOf([1, 2, 3], 1));
   assert(-1, util.indexOf([1, 2, 3], 4));
 
-  console.info("[testIndexOf] passed");
+  util.info("[testIndexOf] passed");
 }
 
 function testIsPalindrome() {
@@ -91,7 +91,7 @@ function testIsPalindrome() {
   assert(false, util.isPalindrome('abcd'));
   assert(true, util.isPalindrome('A man a plan a canal Panama'));
 
-  console.info("[testIsPalindrome] passed");
+  util.info("[testIsPalindrome] passed");
 }
 
 export function testSuite() {

@@ -91,4 +91,44 @@ function isPalindrome(s) {
   return true;
 }
 
+const levelNone = 0,
+      levelError = 1,
+      levelInfo = 2,
+      levelDebug = 3;
+
+const log = function(level) {
+  const appenderConsole = 1,
+        appenderDom = 2,
+        appenderAlert = 4;
+
+  const appenderDomId = 'test-result-list';
+  const logAppender = appenderConsole | appenderDom;
+  const currentLogLevel = levelInfo;
+
+  return function (msg) {
+    if (level > currentLogLevel) {
+      return;
+    }
+
+    if (logAppender & appenderConsole) {
+      console.log(msg);
+    }
+    
+    if (logAppender & appenderDom) {
+      let rootElement = document.getElementById(appenderDomId);
+      let itemElement = document.createElement('li');
+      itemElement.appendChild(document.createTextNode(msg));
+      rootElement.appendChild(itemElement);
+    }
+
+    if (logAppender & appenderAlert) {
+      window.alert(msg);
+    }
+  }
+}
+
+export const error = log(levelError);
+export const info = log(levelInfo);
+export const debug = log(levelDebug);
+
 export { isPrime, factorial, fib, isSorted, filter, reduce, reverse, indexOf, isPalindrome, };

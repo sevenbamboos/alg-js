@@ -7,7 +7,7 @@ var srcPath  = path.join(__dirname, 'app/scripts'),
 module.exports = {
     watch: false,
     cache: true,
-    devtool: '#cheap-module-eval-source-map',
+    devtool: '#eval-source-map',
     context: srcPath,
     entry: {
         app: './main.js',
