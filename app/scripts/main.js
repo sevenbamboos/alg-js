@@ -1,5 +1,3 @@
-import * as utilTest from './alg/util.test';
+import * as interviewBasicTest from './alg/interview.basic.test';
 
-console.log('\'Allo \'Allo!');
-
-utilTest.testSuite();
+interviewBasicTest.testSuite();

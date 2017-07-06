@@ -1,96 +1,3 @@
-function isPrime(n) {
-  if (n < 2) {
-    return false;
-  }
-
-  for (let i = 2; i * i <= n; i++) {
-    if (n % i == 0) return false;
-  }
-  return true;
-}
-
-function factorial(n) {
-  if (n < 1) {
-    return 1;
-  }
-  return n * factorial(n-1);
-}
-
-function fib(n) {
-  var n1 = 0,
-      n2 = 1;
-
-  var index = 0;
-  while (index++ < n) {
-    [n1, n2] = [n2, n1+n2];
-  }
-  return n1;
-}
-
-function isSorted(arr) {
-  for (let i = 0; i < arr.length-1; i++) {
-    if (arr[i] >= arr[i+1]) {
-      return false;
-    }
-  }
-  return true;
-}
-
-function filter(arr, predictor) {
-  let result = [];
-  if (arr) {
-    if (!predictor) {
-      return arr;
-    }
-
-    arr.forEach(x=>{
-      if (predictor.call(null, x)) {
-        result.push(x);
-      }
-    });
-  } 
-  return result;
-}
-
-function reduce(arr, reducer, initValue) {
-  var result = initValue;
-  if (arr && reducer) {
-    arr.forEach(x=>{
-      result = reducer.call(null, x, result);
-    });
-  }
-  return result;
-}
-
-function reverse(s) {
-  if (!s) return s;
-
-  let bufArr = s.split('');
-  for (var i = 0; i < bufArr.length/2; i++) {
-    [bufArr[i], bufArr[bufArr.length-1-i]] = [bufArr[bufArr.length-1-i], bufArr[i]];
-  }
-  return bufArr.join('');
-}
-
-function indexOf(arr, e) {
-  if (!arr || !Array.isArray(arr) || !e) return -1;
-
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] == e) return i;
-  }
-  return -1;
-}
-
-function isPalindrome(s) {
-  if (typeof s !== 'string') return false;
-  if (!s) return true;
-  let arr = s.replace(/\s+/g, '').toUpperCase().split('');
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] != arr[arr.length-1-i]) return false;
-  }
-  return true;
-}
-
 const levelNone = 0,
       levelError = 1,
       levelInfo = 2,
@@ -131,4 +38,25 @@ export const error = log(levelError);
 export const info = log(levelInfo);
 export const debug = log(levelDebug);
 
-export { isPrime, factorial, fib, isSorted, filter, reduce, reverse, indexOf, isPalindrome, };
+export function assert(expected, actual, message) {
+  if (expected == actual) {
+    return;
+  } else {
+    throw Error(message || `expect ${expected}, but was ${actual}`);
+  }
+}
+
+export function assertArray(expected, actual) {
+  if (expected === actual) {
+    return;
+
+  } else if (expected.length != actual.length) {
+    throw Error(`expect array length ${expected.length}, but was ${actual.length}`);
+
+  } else {
+
+    for (var i = 0; i < expected.length; i++) {
+      assert(expected[i], actual[i], `expect ${expected[i]} at position ${i}, but was ${actual[i]}`);
+    }
+  }
+}
