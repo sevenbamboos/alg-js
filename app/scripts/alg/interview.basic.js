@@ -1,3 +1,7 @@
+/*
+ Reference: https://performancejs.com/post/hde6d32/The-Best-Frontend-JavaScript-Interview-Questions-%28written-by-a-Frontend-Engineer%29 
+*/
+
 export function isPrime(n) {
   if (n < 2) {
     return false;
@@ -89,4 +93,63 @@ export function isPalindrome(s) {
     if (arr[i] != arr[arr.length-1-i]) return false;
   }
   return true;
+}
+
+/*
+missing - Takes an unsorted array of unique numbers (ie. no repeats) from 1 through some number n, and returns the missing number in the sequence (there are either no missing numbers, or exactly one missing number). Can you do it in O(N) time? Hint: There’s a clever formula you can use.
+*/
+export function missing(arr) {
+  if (!arr || !Array.isArray(arr)) return undefined;
+
+  const sum = arr.reduce((prev, curr)=>{ return curr + prev;}, 0);
+  const expected = arr.length * (arr.length+1) / 2;
+  if (expected === sum) return undefined;
+  return expected + arr.length+1 - sum;
+}
+
+// for inverval not must start from 1
+export function missingForAnyInterval(arr) {
+  if (!arr || !Array.isArray(arr)) return undefined;
+
+  let min = Infinity,
+      max = -Infinity;
+  arr.forEach(x=>{
+    if (x < min) {
+      min = x;
+    }
+    if (x > max) {
+      max = x;
+    }
+  });
+
+  let sortedArr = [];
+  arr.forEach(x=>{
+    sortedArr[x-min] = 1;
+  });
+
+  for (let i = 0; i < max-min+1; i++) {
+    if (sortedArr[i] !== 1) return i+min;
+  }
+  return undefined;
+}
+
+/*
+isBalanced - Takes a string and returns true or false indicating whether its curly braces are balanced.
+*/
+export function isBalanced(s) {
+  if (!s || typeof s !== 'string') return false;
+  let braceStack = [],
+      charArr = s.split('');
+  
+  for (let i = 0; i < charArr.length; i++) {
+    const c = charArr[i];
+    if (c === '{') {
+      braceStack.push(c);
+    } else if (c === '}') {
+      if (braceStack.pop() !== '{') {
+        return false;
+      }
+    }
+  }
+  return braceStack.length === 0;
 }

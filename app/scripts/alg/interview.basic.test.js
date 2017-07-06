@@ -2,7 +2,7 @@ import { info, assert, assertArray, } from './util';
 
 import {
   isPrime, factorial, fib, isSorted, filter, reduce, reverse, 
-  isPalindrome, indexOf,
+  isPalindrome, indexOf, missing, isBalanced,
 } from './interview.basic';
 
 function testIsPrime() {
@@ -76,6 +76,24 @@ function testIsPalindrome() {
   info("[testIsPalindrome] passed");
 }
 
+function testMissing() {
+  assert(undefined, missing([]));
+  assert(2, missing([1, 4, 3]));
+  assert(1, missing([2, 3, 4]));
+  assert(3, missing([5, 1, 4, 2]));
+  assert(undefined, missing([1, 2, 3, 4]));
+
+  info("[testMissing] passed");
+}
+
+function testIsBalanced() {
+  assert(true, isBalanced('foo { bar { baz } boo }'));
+  assert(false, isBalanced('foo { bar { baz }'));
+  assert(false, isBalanced('foo { bar } }'));
+  
+  info("[testIsBalanced] passed");
+}
+
 export function testSuite() {
   testIsPrime();
   testFactorial();
@@ -86,4 +104,6 @@ export function testSuite() {
   testReverse();
   testIndexOf();
   testIsPalindrome();
+  testMissing();
+  testIsBalanced();
 }
