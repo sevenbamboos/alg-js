@@ -3,18 +3,23 @@ const levelNone = 0,
       levelInfo = 2,
       levelDebug = 3;
 
-const log = function(level) {
-  const appenderConsole = 1,
-        appenderDom = 2,
-        appenderAlert = 4;
+const appenderConsole = 1,
+      appenderDom = 2,
+      appenderAlert = 4;
+
+const log = function(level, logAppender) {
 
   const appenderDomId = 'test-result-list';
-  const logAppender = appenderConsole | appenderDom;
-  const currentLogLevel = levelInfo;
+  const currentLogLevel = levelDebug;
 
   return function (msg) {
     if (level > currentLogLevel) {
       return;
+    }
+
+    if (logAppender & appenderAlert) {
+      window.alert(msg);
+      return; // ignore other appenders in case of alert
     }
 
     if (logAppender & appenderConsole) {
@@ -27,16 +32,12 @@ const log = function(level) {
       itemElement.appendChild(document.createTextNode(msg));
       rootElement.appendChild(itemElement);
     }
-
-    if (logAppender & appenderAlert) {
-      window.alert(msg);
-    }
   }
 }
 
-export const error = log(levelError);
-export const info = log(levelInfo);
-export const debug = log(levelDebug);
+export const error = log(levelError, appenderAlert);
+export const info = log(levelInfo, appenderConsole | appenderDom);
+export const debug = log(levelDebug, appenderConsole);
 
 export function assert(expected, actual, message) {
   if (expected == actual) {
