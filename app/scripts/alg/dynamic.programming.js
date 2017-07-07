@@ -5,26 +5,31 @@ import { debug, } from './util';
 
 function maxOutput(goldMines, resources) {
   let prev = [],
-      curr = [];
+      curr = [],
+      max = -Infinity;
 
-  for (let i = 0; i < resources; i++) {
-    prev[i] = 0;
-  }
-
-  goldMines.forEach(mine=>{
-    for (let i = 1; i <= resources; i++) {
-      if (i >= mine.resource) {
-        if (mine.output > prev[i-1]) {
-          curr[i-1] = mine.output + curr[i-mine.resource];
-        } else {
-          curr[i-1] = prev[i-1];
-        }
-      } else {
-        curr[i-1] = prev[i-1];
+  for (let i = 0; i < goldMines.length; i++) {
+    if (i === 0) {
+      for (let j = 0; j < resources; j++) {
+        if (j+1 < goldMines[0].resource) curr[j] = 0;
+        else curr[j] = goldMines[0].output;
+      }
+    } else {
+      const currentMine = goldMines[i];
+      for (let j = 0; j < resources; j++) {
+        if (j+1 < goldMines[i].resource) curr[j] = 0;
+        else curr[j] = Math.max(prev[j], prev[Math.max(0, j-goldMines[i].resource)] + goldMines[i].output);
       }
     }
-    debug(`${mine.id}:${curr}`);
-  });
+
+    debug(`${goldMines[i].id}:${curr}`);
+    max = curr.reduce((prev, curr)=>{return Math.max(prev, curr);}, max);
+
+    prev = curr;
+    curr = [];
+  }
+
+  return max;
 
 }
 
