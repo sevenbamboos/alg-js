@@ -1,7 +1,9 @@
 import * as interviewBasicTest from './alg/interview.basic.test';
+import * as interviewIntermediateTest from './alg/interview.intermediate.test';
 import * as dp from './alg/dynamic.programming';
 import {info, debug, } from './alg/util';
 
+interviewIntermediateTest.testSuite();
 interviewBasicTest.testSuite();
 
 info(`Max output:${dp.testMaxOutput()}`);

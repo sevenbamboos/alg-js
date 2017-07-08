@@ -95,6 +95,7 @@ function testIsBalanced() {
 }
 
 export function testSuite() {
+  info("*** basic ***");
   testIsPrime();
   testFactorial();
   testFib();
