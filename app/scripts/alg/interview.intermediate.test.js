@@ -1,7 +1,7 @@
-import { info, assert, assertArray, } from './util';
+import { info, debug, assert, assertArray, assertArrayWithoutOrder, } from './util';
 
 import {
-  isBalanced2,
+  isBalanced2, uniq, intersection, sort,
 } from './interview.intermediate';
 
 function testIsBalanced2() {
@@ -21,7 +21,37 @@ function testIsBalanced2() {
   info("[testIsBalanced2] passed");
 }
 
+function testUniq() {
+  assertArray([], uniq([]));
+  assertArrayWithoutOrder([1,4,2,3,8], uniq([1, 4, 2, 2, 3, 4, 8]));           // [1, 4, 2, 3, 8]
+  info("[testUniq] passed");
+}
+
+function testIntersection() {
+  assertArrayWithoutOrder([4,1], intersection([1, 5, 4, 2], [8, 91, 4, 1, 3]));
+  assertArrayWithoutOrder([], intersection([1, 5, 4, 2], [7, 12]));
+
+  info("[testIntersection] passed");
+}
+
+function testSort() {
+
+  const assertSort = function(expected, origin) {
+    sort(origin);
+    assertArray(expected, origin);
+  }
+
+  assertSort([], []);
+  assertSort([-4, 0, 1, 3, 3, Infinity], [-4, 1, Infinity, 3, 3, 0]);
+  assertSort([0,1,2,3,4,5,6,7,8,9], [4,2,6,9,1,3,8,7,5,0]);
+
+  info("[testSort] passed");
+}
+
 export function testSuite() {
   info("*** intermediate ***");
   testIsBalanced2();
+  testUniq();
+  testIntersection();
+  testSort();
 }
