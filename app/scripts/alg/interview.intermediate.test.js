@@ -1,7 +1,9 @@
-import { info, debug, assert, assertArray, assertArrayWithoutOrder, } from './util';
+import { 
+  info, debug, assert, assertArray, assertArrayWithoutOrder, assertObject, 
+} from './util';
 
 import {
-  isBalanced2, uniq, intersection, sort,
+  isBalanced2, uniq, intersection, sort, includes, assignDeep,
 } from './interview.intermediate';
 
 function testIsBalanced2() {
@@ -48,10 +50,28 @@ function testSort() {
   info("[testSort] passed");
 }
 
+function testIncludes() {
+  assert(true, includes([1, 3, 8, 10], 8));
+  assert(true, includes([1, 3, 8, 8, 15], 15));
+  assert(false, includes([1, 3, 8, 10, 15], 9));
+
+  info("[testIncludes] passed");
+}
+
+function testAssignDeep() {
+  assertObject(assignDeep({ a: 1 }, {}), { a: 1 });
+  assertObject(assignDeep({ a: 1 }, { a: 2 }), { a: 2 });
+  assertObject(assignDeep({ a: 1 }, { a: { b: 2 } }), { a: { b: 2 } });
+  assertObject(assignDeep({ a: { b: { c: 1 }}}, { a: { b: { d: 2 }}, e: 3 }), { a: { b: { c: 1, d: 2 }}, e: 3 });
+  info("[testAssignDeep] passed");
+}
+
 export function testSuite() {
   info("*** intermediate ***");
   testIsBalanced2();
   testUniq();
   testIntersection();
   testSort();
+  testIncludes();
+  testAssignDeep();
 }

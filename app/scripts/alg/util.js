@@ -74,6 +74,19 @@ export function assertArrayWithoutOrder(expected, actual) {
   }
 }
 
+export function assertObject(exp, act) {
+  if (typeof exp !== 'object') {
+    assert(true, exp == act);
+  } else {
+    for (let key in exp) {
+      assertObject(exp[key], act[key]);
+    }
+    for (let key in act) {
+      assertObject(act[key], exp[key]);
+    }
+  }
+}
+
 export function rnd(min, maxNotIncluded) {
   return Math.floor(Math.random() * (maxNotIncluded-min)) + min;
 }

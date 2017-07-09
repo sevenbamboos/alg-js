@@ -119,3 +119,47 @@ export function sort(arr) {
 
   _sort(arr, 0, arr.length-1);
 }
+
+/*
+includes - Return true or false indicating whether the given number appears in the given sorted array. Can you do it in O(log(N)) time?
+*/
+export function includes(arr, i) {
+  const _includes = function(arr, i, begin, end) {
+    if (begin > end) return false;
+    else if (begin === end) return arr[begin] == i;
+    else {
+      const mid = Math.floor((end-begin)/2)+begin,
+            pivot = arr[mid];
+      if (pivot > i) return _includes(arr, i, begin, mid-1);
+      else if (pivot < i) return _includes(arr, i, mid+1, end);
+      else return true;
+    }
+  };
+
+  if (!arr || !Array.isArray(arr)) return false;
+  if (!i) return true;
+
+  return _includes(arr, i, 0, arr.length);
+}
+
+/*
+assignDeep - Like Object.assign, but merges objects deeply.
+*/
+export function assignDeep(obj1, obj2) {
+  if (typeof obj1 !== "object") {
+    return obj2;
+  } else {
+    let result = obj1;
+    for (let key in obj1) {
+      if (obj2[key]) {
+        result[key] = assignDeep(result[key], obj2[key]);
+      }
+    }
+    for (let key in obj2) {
+      if (!obj1[key]) {
+        result[key] = obj2[key];
+      }
+    }
+    return result;
+  }
+}
