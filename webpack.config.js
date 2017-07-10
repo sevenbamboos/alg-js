@@ -16,6 +16,16 @@ module.exports = {
         path: distPath,
         filename: '[name].bundle.js',
     },
+    module: {
+        rules: [{
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+                loader: 'babel-loader',
+                options: {presets: ['env']}
+            }
+        }]
+    },
     resolve: {
         modules: ["node_modules"],
     },

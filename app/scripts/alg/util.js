@@ -61,3 +61,43 @@ export function assertArray(expected, actual) {
     }
   }
 }
+
+export function assertArrayWithoutOrder(expected, actual) {
+  if (expected.length != actual.length) {
+    throw Error(`expect array length ${expected.length}, but was ${actual.length}`);
+
+  } else {
+
+    for (var i = 0; i < expected.length; i++) {
+      assert(true, actual.indexOf(expected[i]) !== -1);
+    }
+  }
+}
+
+export function assertObject(exp, act) {
+  if (typeof exp !== 'object') {
+    assert(true, exp == act);
+  } else {
+    for (let key in exp) {
+      assertObject(exp[key], act[key]);
+    }
+    for (let key in act) {
+      assertObject(act[key], exp[key]);
+    }
+  }
+}
+
+export function rnd(min, maxNotIncluded) {
+  return Math.floor(Math.random() * (maxNotIncluded-min)) + min;
+}
+
+export function shuffle(arr) {
+  if (!arr || !Array.isArray(arr)) return arr;
+
+  for (let i = 0; i < arr.length-1; i++) {
+    const toBeExchanged = rnd(i+1, arr.length);
+    [arr[i], arr[toBeExchanged]] = [arr[toBeExchanged], arr[i]];
+  }
+  return arr;
+}
+
