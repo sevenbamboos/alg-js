@@ -6,10 +6,6 @@ import {info, debug, } from './alg/util';
 interviewIntermediateTest.testSuite();
 interviewBasicTest.testSuite();
 
-const foo = {id:1, name:"foo"};
-const {id, ...rest} = foo;
-
-
 info(`Max output:${dp.testMaxOutput()}`);
 
 // array destructing ES6
